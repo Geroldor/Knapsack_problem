@@ -40,6 +40,8 @@ void ordenador(){
 
 int main(){
     FILE *time_exec;
+    FILE *sizes = fopen("sizes.txt", "r");
+    FILE *weights = fopen("weights.txt", "r");
     time_exec = fopen("tempos_de_execucao(size_&_weight).txt", "w");
     float tempo;
     clock_t t;
@@ -50,8 +52,8 @@ int main(){
 
         for (int i = 0; i < MAX; i++)
         {
-            itens[i].size = (rand() % 200);
-            itens[i].weight = (rand() % 100);
+            itens[i].size = fscanf(sizes, "%d", &itens[i].size);
+            itens[i].weight = fscanf(weights, "%d", &itens[i].weight);
             itens[i].mean = (float) itens[i].size / itens[i].weight;
         }
         ordenador();

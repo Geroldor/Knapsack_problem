@@ -41,6 +41,8 @@ void branch_and_bound(Item items[], int n, int capacity, int level) {
 
 int main() {
     FILE *out = fopen("tempo.txt", "w");
+    FILE *sizes = fopen("sizes.txt", "r");
+    FILE *weights = fopen("weights.txt", "r");
     double kk;
     clock_t t;
     
@@ -51,8 +53,8 @@ int main() {
     Item items[MAX_N]; 
 
     for (int i = 0; i < n; i++) {
-        items[i].weight = rand() % 200;
-        items[i].value = rand() % 200;
+        items[i].weight = fscanf(weights, "%d", &items[i].weight);
+        items[i].value = fscanf(sizes, "%d", &items[i].value);
     }
 
     

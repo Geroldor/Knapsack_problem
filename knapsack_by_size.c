@@ -44,17 +44,15 @@ int main(){
     clock_t t;
     for(int o = 0; o < MAX; o++){
         t = clock();
-        //FILE *s = fopen("sizes.txt", "r");
-        //FILE *w = fopen("weights.txt", "r");
+        FILE *s = fopen("sizes.txt", "r");
+        FILE *w = fopen("weights.txt", "r");
         b.max_size = CAPACITY;
         b.max_weight = MAX;
 
         for (int i = 0; i < MAX; i++)
         {
-            //fscanf(s, "%d", &itens[i].size);
-            //fscanf(w, "%d", &itens[i].weight);
-            itens[i].size = (rand() % 200);
-            itens[i].weight = (rand() % 100);
+            fscanf(s, "%d", &itens[i].size);
+            fscanf(w, "%d", &itens[i].weight);
         }
         ordenador();
         int j = 0;
