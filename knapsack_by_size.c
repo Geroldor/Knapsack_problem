@@ -39,7 +39,7 @@ void ordenador(){
 
 int main(){
     FILE *time_exec;
-    time_exec = fopen("tempos_de_execucao(size).txt", "w");
+    time_exec = fopen("tempos.txt", "w");
     float tempo;
     clock_t t;
     for(int o = 0; o < MAX; o++){

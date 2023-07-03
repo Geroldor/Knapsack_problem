@@ -42,7 +42,7 @@ int main(){
     FILE *time_exec;
     FILE *sizes = fopen("sizes.txt", "r");
     FILE *weights = fopen("weights.txt", "r");
-    time_exec = fopen("tempos_de_execucao(size_&_weight).txt", "w");
+    time_exec = fopen("tempos.txt", "w");
     float tempo;
     clock_t t;
     for(int o = 0; o < MAX; o++){

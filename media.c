@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 int main(){
-    char *filename;
-    float tempo, soma, media, aux;
+    float tempo, soma, media, aux = 0;
     FILE *t;
-    t = fopen("tempos_de_execucao(size_&_weight).txt", "r");
+    t = fopen("tempos.txt", "r");
     if(t == NULL){
         printf("\nErro na abertura do arquivo\n");
         exit(1);
