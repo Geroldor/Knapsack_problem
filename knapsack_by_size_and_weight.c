@@ -4,47 +4,52 @@
 #define MAX 10000
 #define CAPACITY 500
 
-typedef struct item{
+typedef struct item
+{
     int size;
     int weight;
     float mean;
-}item;
+} item;
 
-typedef struct bag{
+typedef struct bag
+{
     int max_size;
     int max_weight;
     int size;
     int weight;
     item itens[MAX];
-}bag;
+} bag;
 
 item itens[MAX];
 bag b;
 
-void ordenador(){
+void ordenador()
+{
     item aux;
     for (int i = 1; i <= MAX; i++)
     {
         for (int j = 0; j < MAX - 1; j++)
         {
-            if(itens[j].mean > itens[j+1].mean){
+            if (itens[j].mean > itens[j + 1].mean)
+            {
                 aux = itens[j];
-                itens[j] = itens[j+1];
-                itens[j+1] = aux;
+                itens[j] = itens[j + 1];
+                itens[j + 1] = aux;
             }
         }
     }
 }
 
-
-
-int main(){
+int main()
+{
     FILE *time_exec;
     FILE *sizes = fopen("sizes.txt", "r");
     FILE *weights = fopen("weights.txt", "r");
     time_exec = fopen("tempos.txt", "w");
     float tempo;
     clock_t t;
+    for (int z = 0; z < 100; z++)
+    {
         t = clock();
         b.max_size = CAPACITY;
         b.max_weight = CAPACITY;
@@ -53,7 +58,7 @@ int main(){
         {
             itens[i].size = fscanf(sizes, "%d", &itens[i].size);
             itens[i].weight = fscanf(weights, "%d", &itens[i].weight);
-            itens[i].mean = (float) itens[i].size / itens[i].weight;
+            itens[i].mean = (float)itens[i].size / itens[i].weight;
         }
         ordenador();
         int j = 0;
@@ -68,8 +73,8 @@ int main(){
             }
         }
         t = clock() - t;
-        tempo = (double) t/(CLOCKS_PER_SEC/1000);
+        tempo = (double)t / (CLOCKS_PER_SEC / 1000);
         fprintf(time_exec, "%lf\n", tempo);
-    
+    }
     return 0;
 }

@@ -4,44 +4,50 @@
 #define MAX 10000
 #define CAPACITY 500
 
-typedef struct item{
+typedef struct item
+{
     int size;
     int weight;
-}item;
+} item;
 
-typedef struct bag{
+typedef struct bag
+{
     int max_size;
     int max_weight;
     int size;
     int weight;
     item itens[MAX];
-}bag;
+} bag;
 
 item itens[MAX];
 bag b;
 
-void ordenador(){
+void ordenador()
+{
     item aux;
     for (int i = 1; i <= MAX; i++)
     {
         for (int j = 0; j < MAX - 1; j++)
         {
-            if(itens[j].size > itens[j+1].size){
+            if (itens[j].size > itens[j + 1].size)
+            {
                 aux = itens[j];
-                itens[j] = itens[j+1];
-                itens[j+1] = aux;
+                itens[j] = itens[j + 1];
+                itens[j + 1] = aux;
             }
         }
     }
 }
 
-
-
-int main(){
+int main()
+{
     FILE *time_exec;
     time_exec = fopen("tempos.txt", "w");
     float tempo;
     clock_t t;
+    for (int w = 0; w < 100; w++)
+    {
+
         t = clock();
         FILE *s = fopen("sizes.txt", "r");
         FILE *w = fopen("weights.txt", "r");
@@ -66,7 +72,8 @@ int main(){
             }
         }
         t = clock() - t;
-        tempo = (double) t/(CLOCKS_PER_SEC/1000);
+        tempo = (double)t / (CLOCKS_PER_SEC / 1000);
         fprintf(time_exec, "%lf\n", tempo);
+    }
     return 0;
 }
