@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 100
+#define MAX 10000
 #define CAPACITY 500
 
 typedef struct item{
@@ -42,7 +42,6 @@ int main(){
     time_exec = fopen("tempos.txt", "w");
     float tempo;
     clock_t t;
-    for(int o = 0; o < MAX; o++){
         t = clock();
         FILE *s = fopen("sizes.txt", "r");
         FILE *w = fopen("weights.txt", "r");
@@ -69,6 +68,5 @@ int main(){
         t = clock() - t;
         tempo = (double) t/(CLOCKS_PER_SEC/1000);
         fprintf(time_exec, "%lf\n", tempo);
-    }
     return 0;
 }

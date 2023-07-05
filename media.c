@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-int main(){
+void media(){
     float tempo, soma, media, aux = 0;
     FILE *t;
     t = fopen("tempos.txt", "r");
@@ -17,5 +17,4 @@ int main(){
     }
     media = soma/aux;
     printf("\nResultado:\t%f\n", media);
-    return 0;
 }

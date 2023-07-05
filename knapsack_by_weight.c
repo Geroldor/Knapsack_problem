@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 100
+#define MAX 10000
 #define CAPACITY 500
 
 typedef struct item{
@@ -42,33 +42,33 @@ int main(){
     time_exec = fopen("tempos.txt", "w");
     float tempo;
     clock_t t;
-    for(int o = 0; o < MAX; o++){
-        t = clock();
-        FILE *s = fopen("sizes.txt", "r");
-        FILE *w = fopen("weights.txt", "r");
-        b.max_size = MAX;
-        b.max_weight = CAPACITY;
+    t = clock();
+    FILE *s = fopen("sizes.txt", "r");
+    FILE *w = fopen("weights.txt", "r");
+    b.max_size = MAX;
+    b.max_weight = CAPACITY;
 
-        for (int i = 0; i < MAX; i++)
-        {
-            fscanf(s, "%d", &itens[i].size);
-            fscanf(w, "%d", &itens[i].weight);
-        }
-        ordenador();
-        int j = 0;
-        for (int i = 0; i < MAX; i++)
-        {
-            if (b.weight + itens[i].weight < b.max_weight)
-            {
-                b.size = b.size + itens[i].size;
-                b.weight = b.weight + itens[i].weight;
-                b.itens[j] = itens[i];
-                j++;
-            }
-        }
-        t = clock() - t;
-        tempo = (double) t/(CLOCKS_PER_SEC/1000);
-        fprintf(time_exec, "%lf\n", tempo);
+    for (int i = 0; i < MAX; i++)
+    {
+        fscanf(s, "%d", &itens[i].size);
+        fscanf(w, "%d", &itens[i].weight);
     }
-    return 0;
+    ordenador();
+    int j = 0;
+    for (int i = 0; i < MAX; i++)
+    {
+        if (b.weight + itens[i].weight < b.max_weight)
+        {
+            b.size = b.size + itens[i].size;
+            b.weight = b.weight + itens[i].weight;
+            b.itens[j] = itens[i];
+            j++;
+        }
+    }
+    t = clock() - t;
+    tempo = (double) t/(CLOCKS_PER_SEC/1000);
+    fprintf(time_exec, "%lf\n", tempo);
+    fclose(time_exec);
+    fclose(s);
+    fclose(w);
 }

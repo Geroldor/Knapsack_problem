@@ -16,7 +16,7 @@ Item items[MAX_N];
 int current_weight; 
 int current_value; 
 
-void branch_and_bound(Item items[], int n, int capacity, int level) {
+void branch_and_bound(int n, int capacity, int level) {
     if (level == n) {
         if (current_value > best_value) {
             best_value = current_value;
@@ -31,13 +31,13 @@ void branch_and_bound(Item items[], int n, int capacity, int level) {
         current_solution[level] = 1;
         current_weight = current_weight + items[level].weight;
         current_value = current_value + items[level].value;
-        branch_and_bound(items, n, capacity, level + 1);
+        branch_and_bound(n, capacity, level + 1);
         current_weight = current_weight - items[level].weight;
         current_value = current_value - items[level].value;
     }
 
     current_solution[level] = 0;
-    branch_and_bound(items, n, capacity, level + 1);
+    branch_and_bound(n, capacity, level + 1);
 }
 
 void ordenador(){
@@ -58,32 +58,35 @@ void ordenador(){
 
 int main() {
     FILE *out = fopen("tempos.txt", "w");
-    FILE *sizes = fopen("sizes.txt", "r");
-    FILE *weights = fopen("weights.txt", "r");
+    //FILE *sizes = fopen("sizes.txt", "r");
+    //FILE *weights = fopen("weights.txt", "r");
     double kk;
     clock_t t;
     
     for(int z = 0; z < 100; z++){
         t = clock();
         int n = MAX_N; 
-        int capacity; 
+        int capacity = 200; 
     
 
         for (int i = 0; i < n; i++) {
-            items[i].weight = fscanf(weights, "%d", &items[i].weight);
-            items[i].value = fscanf(sizes, "%d", &items[i].value);
+            //items[i].weight = fscanf(weights, "%d", &items[i].weight);
+            //items[i].value = fscanf(sizes, "%d", &items[i].value);
+            items[i].value = rand() % 200;
+            items[i].weight = rand() % 100;
         }
 
     
         best_value = 0;
         current_weight = 0;
         current_value = 0;
-        ordenador();
+        //ordenador();
     
-        branch_and_bound(items, n, capacity, 0);
+        branch_and_bound(n, capacity, 0);
         t = clock() - t;
         kk = (double) t/(CLOCKS_PER_SEC/1000);
         fprintf(out, "%f\n", kk);
+        printf("%d\n", best_value);
     }
     return 0;
 }
